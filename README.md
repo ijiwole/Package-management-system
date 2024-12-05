@@ -109,50 +109,51 @@ mutation Login {
 
 #### Create a Package
 ```graphql
-mutation CreatePackage {
+mutation {
   createPackage(
-    input: {
-      name: String!
-      description: String!
-      price: Float!
-      expirationDate: Date!
-    }
+    name: "Test",
+    description: "This is the premium package with extra features",
+    price: 1000,
+    expirationDate: "2024-12-31"
   ) {
     id
     name
     description
     price
     expirationDate
+    createdBy {
+      id
+      username
+    }
   }
 }
 ```
 
-#### Get All Packages
+#### Query Pacakges By Date 
 ```graphql
 query GetPackages {
-  packages(
-    filter: {
-      expirationDateFrom: Date
-      expirationDateTo: Date
-    }
-  ) {
+  query {
+  packages(filterByDate: "2024-12-31") {
     id
     name
     description
-    price
     expirationDate
+    createdBy {
+      id
+      username
+    }
   }
+}
 }
 ```
 
 #### Get Single Package
 ```graphql
 query GetPackage {
-  package(id: ID!) {
-    id
+  package(id: "675155a97d33b878c033c978") {
+    id  
     name
     description
-    price
     expirationDate
   }
 }
@@ -161,14 +162,7 @@ query GetPackage {
 #### Update Package
 ```graphql
 mutation UpdatePackage {
-  updatePackage(
-    id: ID!
-    input: {
-      name: String
-      description: String
-      price: Float
-    }
-  ) {
+  updatePackage(id: "67514885a36681bbfb26e317", name: "Updated Plan", description: "New description", price: 120) {
     id
     name
     description
