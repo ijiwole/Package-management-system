@@ -8,6 +8,7 @@ const resolvers = {
     },
     Query: {
         ...userResolvers.Query,
+        ...packageResolvers.Query
     }
 }
 
