@@ -207,6 +207,7 @@ Query: {
   packages: async (_, { filterByDate }, req) => {
     
     try {
+
   
       if (filterByDate) {
         const parsedDate = moment(filterByDate, "YYYY-MM-DD", true).startOf('day').toDate();
@@ -238,6 +239,12 @@ Query: {
     } catch (error) {
       console.error('Error in packages query:', error);
       
+      // Log the full error details
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+  
+      // Return an empty array instead of throwing
       return [];
     }
   },
